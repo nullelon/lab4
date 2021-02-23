@@ -1,7 +1,7 @@
 package lab4
 
 type Sorter interface {
-	Sort([]int)
+	Sort(data []int)
 }
 
 type (
