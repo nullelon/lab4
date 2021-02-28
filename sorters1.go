@@ -6,7 +6,39 @@ type MergeSort struct{}
 type HeapSort struct{}
 
 func (m MergeSort) Sort(data []int) {
-	panic("implement me")
+	mergeSort(data, 0, len(data)-1)
+}
+
+//hi - last element index NOT LENGTH
+func mergeSort(data []int, lo, hi int) {
+	if lo < hi {
+		m := (lo + hi) / 2
+		mergeSort(data, lo, m)
+		mergeSort(data, m+1, hi)
+
+		mgd := merge(data[lo:m+1], data[m+1:hi+1])
+		copy(data[lo:], mgd)
+
+	}
+
+}
+
+func merge(arr1, arr2 []int) []int {
+	mgd := make([]int, 0)
+
+	i := 0
+	j := 0
+	for i < len(arr1) || j < len(arr2) {
+		if j >= len(arr2) || i < len(arr1) && arr1[i] <= arr2[j] {
+			mgd = append(mgd, arr1[i])
+			i++
+		} else {
+			mgd = append(mgd, arr2[j])
+			j++
+		}
+	}
+
+	return mgd
 }
 
 func (h HeapSort) Sort(data []int) {
